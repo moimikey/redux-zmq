@@ -1,0 +1,33 @@
+{
+  "name": "redux-zmq",
+  "version": "0.0.1",
+  "description": "A redux middleware for socket connection",
+  "main": "index.js",
+  "scripts": {
+    "lint": "xo"
+  },
+  "keywords": [
+    "zmq",
+    "redux"
+  ],
+  "author": "Revath S Kumar <rsk@revathskumar.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-eslint": "6.0.0-beta.5",
+    "xo": "^0.12.1"
+  },
+  "eslintConfig": {
+    "extends": "xo-space",
+    "ecmaVersion": 6,
+    "ecmaFeatures": {
+      "experimentalObjectRestSpread": true
+    }
+  },
+  "xo": {
+    "space": 2,
+    "esnext": true
+  },
+  "dependencies": {
+    "msgpack": "^1.0.2"
+  }
+}
