@@ -4,10 +4,6 @@ import sinon from 'sinon';
 
 import createZmqMiddleware from './index';
 
-// let store;
-// let next;
-// let action;
-
 const zmqMock = {
   on: sinon.spy(),
   connect: sinon.spy(),

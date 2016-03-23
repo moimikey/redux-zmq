@@ -3,7 +3,6 @@ let connectTimer;
 export default zeromq => {
   return ({dispatch}) => {
     zeromq.on('connect', () => {
-      console.log('zeromqMiddleWare :: on connect');
       clearTimeout(connectTimer);
       dispatch({
         type: 'CONNECTED'
@@ -27,10 +26,8 @@ export default zeromq => {
       if (!action.zmq) {
         return next(action);
       }
-      console.log('zeromqMiddleWare :: ', action);
 
       const {type, zmq, ...rest} = action;
-      console.log('zeromqMiddleWare :: ', zmq, type, rest);
 
       if (type) {
         next({type, ...rest});
