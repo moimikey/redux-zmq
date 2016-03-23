@@ -7,6 +7,7 @@
     "lint": "xo"
   },
   "keywords": [
+    "zeromq",
     "zmq",
     "redux"
   ],
@@ -28,6 +29,5 @@
     "esnext": true
   },
   "dependencies": {
-    "msgpack": "^1.0.2"
   }
 }

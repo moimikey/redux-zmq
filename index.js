@@ -1,15 +1,36 @@
-import MsgPack from 'msgpack';
+let connectTimer;
 
-export default zmq => {
+export default zeromq => {
   return ({dispatch}) => {
+    zeromq.on('connect', () => {
+      console.log('zeromqMiddleWare :: on connect');
+      clearTimeout(connectTimer);
+      dispatch({
+        type: 'CONNECTED'
+      });
+    });
+
+    zeromq.on('disconnect', () => {
+      dispatch({
+        type: 'DISCONNECTED'
+      });
+    });
+
+    zeromq.on('message', data => {
+      dispatch({
+        type: 'MESSAGE',
+        data
+      });
+    });
+
     return next => action => {
-      if (!action.sock) {
+      if (!action.zmq) {
         return next(action);
       }
-      console.log('zmqMiddleWare :: ', action);
+      console.log('zeromqMiddleWare :: ', action);
 
-      const {type, sock, ...rest} = action;
-      console.log('zmqMiddleWare :: ', sock, type, rest);
+      const {type, zmq, ...rest} = action;
+      console.log('zeromqMiddleWare :: ', zmq, type, rest);
 
       if (type) {
         next({type, ...rest});
@@ -17,36 +38,25 @@ export default zmq => {
 
       switch (type) {
         case 'CONNECT':
-          zmq.connect(`tcp://${sock.ip}:5556`);
+          zeromq.connect(`tcp://${zmq.ip}:${zmq.port}`);
+
+          dispatch({
+            type: 'CONNECTING'
+          });
+
+          connectTimer = setTimeout(() => {
+            dispatch({
+              type: 'ERROR',
+              message: 'Not able to connect to server'
+            });
+          }, 5000);
           break;
         case 'COMMAND':
-          zmq.send(sock.cmd);
+          zeromq.send(zmq.cmd);
           break;
         default:
           break;
       }
-
-      zmq.on('connect', () => {
-        console.log('zmqMiddleWare :: on connect');
-        dispatch({
-          type: 'CONNECTED'
-        });
-      });
-
-      zmq.on('disconnect', () => {
-        dispatch({
-          type: 'DISCONNECTED'
-        });
-      });
-
-      zmq.on('message', reply => {
-        const data = MsgPack.unpack(reply);
-        dispatch({
-          type: 'DATA',
-          cmd: sock.cmd,
-          data
-        });
-      });
     };
   };
 };
