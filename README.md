@@ -7,11 +7,10 @@
 ```js
 import {applyMiddleware, createStore} from 'redux';
 import thunk from 'redux-thunk';
-import createZmqMiddleware from 'requx-zmq';
+import zmqMiddleware from 'requx-zmq';
 import ZMQ from 'zmq';
 
 const requester = ZMQ.socket('req');
-
 requester.monitor(500, 0);
 
 const createStoreWithMiddleware = applyMiddleware(zmqMiddleware(requester))(createStore);
