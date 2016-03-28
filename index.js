@@ -1,7 +1,7 @@
-let connectTimer;
-
 export default zeromq => {
   return ({dispatch}) => {
+    let connectTimer;
+
     zeromq.on('connect', () => {
       clearTimeout(connectTimer);
       dispatch({
@@ -35,6 +35,7 @@ export default zeromq => {
 
       switch (type) {
         case 'CONNECT':
+          console.log('CONNECT :: ', zmq);
           zeromq.connect(`tcp://${zmq.ip}:${zmq.port}`);
 
           dispatch({

@@ -2,9 +2,10 @@
   "name": "redux-zmq",
   "version": "0.0.1",
   "description": "A redux middleware for socket connection",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "ava",
+    "build": "babel index.js -o dist/index.js",
     "t": "mocha --compilers js:babel/register test.js",
     "lint": "xo"
   },
@@ -17,6 +18,7 @@
   "license": "MIT",
   "devDependencies": {
     "ava": "^0.13.0",
+    "babel-cli": "^6.6.5",
     "babel-core": "^6.7.4",
     "babel-eslint": "6.0.0-beta.5",
     "babel-plugin-espower": "^2.1.2",

@@ -1,4 +1,4 @@
-## redux-zmq [![Build Status](https://travis-ci.org/revathskumar/redux-zmq.svg?branch=master)](https://travis-ci.org/revathskumar/redux-zmq)
+## redux-zmq [![Build Status](https://travis-ci.org/code-mancers/redux-zmq.svg?branch=master)](https://travis-ci.org/code-mancers/redux-zmq)
 
 > A redux middleware for [zeromq](https://github.com/JustinTulloss/zeromq.node)
 
