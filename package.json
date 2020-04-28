@@ -16,7 +16,7 @@
   "author": "Revath S Kumar <rsk@revathskumar.com>",
   "license": "MIT",
   "devDependencies": {
-    "ava": "^0.13.0",
+    "ava": "^3.8.1",
     "babel-core": "^6.7.4",
     "babel-eslint": "6.0.0-beta.5",
     "babel-plugin-espower": "^2.1.2",
